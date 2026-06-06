@@ -6,7 +6,6 @@ import imagenVeterinaria from './assets/Hero.jpg';
 import { Heart, Palette, Zap, Shield, Dog, Cat, Mail, Search, CheckCircle, Clock, XCircle, Package } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
-c
 const API_BASE = "https://sisvic-api.onrender.com";
 const API_URL = `${API_BASE}/api/public`;
 
