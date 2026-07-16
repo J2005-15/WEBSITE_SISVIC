@@ -291,9 +291,15 @@ const handleAdoptionSubmit = async (e) => {
                     <div className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-bold ${isDarkMode ? 'bg-blue-900/30 text-blue-200' : 'bg-blue-100 text-blue-700'}`}><Zap className="w-4 h-4 flex-shrink-0" /><span className="line-clamp-1">{details.comportamiento}</span></div>
                     <div className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-bold ${isDarkMode ? 'bg-green-900/30 text-green-200' : 'bg-green-100 text-green-700'}`}><Shield className="w-4 h-4 flex-shrink-0" /><span className="line-clamp-1">{details.estado}</span></div>
                   </div>
-                  <button onClick={() => { setSelectedPet(pet.id_pet ?? pet.id); setShowAdoptionForm(true); }} className="w-full bg-gradient-to-r from-[#D4AC4E] to-[#C49A3A] hover:from-[#C49A3A] hover:to-[#B5862D] text-[#212529] font-bold py-3 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 uppercase tracking-wide text-sm">
-                    🐾 Adoptar a {pet.name}
-                  </button>
+                  {pet.status === 'en_proceso' ? (
+                    <div className="w-full bg-amber-100 border border-amber-300 text-amber-800 font-bold py-3 rounded-2xl text-center text-sm uppercase tracking-wide">
+                      🕐 En Proceso de Adopción
+                    </div>
+                  ) : (
+                    <button onClick={() => { setSelectedPet(pet.id_pet ?? pet.id); setShowAdoptionForm(true); }} className="w-full bg-gradient-to-r from-[#D4AC4E] to-[#C49A3A] hover:from-[#C49A3A] hover:to-[#B5862D] text-[#212529] font-bold py-3 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 uppercase tracking-wide text-sm">
+                      🐾 Adoptar a {pet.name}
+                    </button>
+                  )}
                 </div>
               </div>
             );
