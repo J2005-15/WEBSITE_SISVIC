@@ -94,21 +94,14 @@ const handleAdoptionSubmit = async (e) => {
       visitor_phone: f.visitor_phone.value,
     };
     try {
-      // 1. Guardar en base de datos
       await axios.post(`${API_BASE}/api/public/adoption`, payload);
-      
-      // 2. Enviar correo de adopción
-      await emailjs.send(
+      setIsSubmitted(true);
+      emailjs.send(
         'service_9yojyyo',
         'template_tcdnbc8',
-        {
-          visitor_name: f.visitor_name.value,
-          visitor_email: f.visitor_email.value,
-        },
+        { visitor_name: f.visitor_name.value, visitor_email: f.visitor_email.value },
         'NyD6i0L4xJ8Fg872m'
-      );
-
-      setIsSubmitted(true);
+      ).catch(() => {});
     } catch (err) {
       const d = err.response?.data;
       const msg = d?.message || d?.error || d?.errors?.[0]?.msg || 'Error al enviar la solicitud.';
@@ -134,11 +127,9 @@ const handleAdoptionSubmit = async (e) => {
       payment_date: f.payment_date.value,
     };
     try {
-      // 1. Guardar en base de datos
       await axios.post(`${API_BASE}/api/public/donations`, payload);
-      
-      // 2. Enviar correo de donación
-      await emailjs.send(
+      setIsDonationSubmitted(true);
+      emailjs.send(
         'service_9yojyyo',
         'template_3bx6gjh',
         {
@@ -148,9 +139,7 @@ const handleAdoptionSubmit = async (e) => {
           reference: f.payment_reference.value
         },
         'NyD6i0L4xJ8Fg872m'
-      );
-
-      setIsDonationSubmitted(true);
+      ).catch(() => {});
     } catch (err) {
       setDonationError(err.response?.data?.message ?? 'Error al registrar el aporte.');
     } finally {
